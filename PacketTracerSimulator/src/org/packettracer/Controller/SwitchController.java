@@ -29,7 +29,8 @@ public class SwitchController {
         System.out.println();
         for(int i = 0; i < arregloSwitch.size(); i++){
            String name = arregloSwitch.get(i).getName();
-           System.out.println(" " + i +") "+ name +" - Etherner: "+ 24);
+           int ports = arregloSwitch.get(i).getIntEthernet().length;
+           System.out.println(" " + i +") "+ name +" - Etherner: "+ ports);
         }
         System.out.println();
     }

@@ -3,12 +3,14 @@ package org.packettracer.Controller;
 import java.util.Scanner;
 
 import org.packettracer.Controller.SwitchController;
+import org.packettracer.Controller.RouterController;
 import org.packettracer.View.CommandEngineView;
 
 public class CommandController {
     
     Scanner dt = new Scanner(System.in);
     SwitchController switchController = new SwitchController();
+    RouterController routerController = new RouterController();
     CommandEngineView commandEngineView = new CommandEngineView();
     String[] createCommands = {"Create Router","Create Switch","Create Pc",
         "Show Switch","Show Router","Show Pc", "Update Router","Update Switch",
@@ -28,7 +30,7 @@ public class CommandController {
                     if(createCommands[i].equalsIgnoreCase(com[0] + " " +com[1])){
                         switch(createCommands[i]){
                             case "Create Router":
-                               
+                               routerController.createRouter(com[2]);
                                 break;
                             case "Create Switch" :
                                 switchController.createSwitch(com[2]);
@@ -40,13 +42,13 @@ public class CommandController {
                                 switchController.listSwitches();
                                 break;
                             case "Show Router" :
-                                
+                                routerController.listRouter();
                                 break;
                             case "Show Pc" :
                                 
                                 break;
                             case "Update Router":
-
+                                routerController.editRouter(Integer.parseInt(com[2]), com[3]);
                                 break;
                             case "Update Switch" :
                                 switchController.editSwitch(Integer.parseInt(com[2]), com[3]);
@@ -55,7 +57,7 @@ public class CommandController {
 
                                 break;
                             case "Delete Router":
-
+                                routerController.deleteRouter(Integer.parseInt(com[2]));
                                 break;
                             case "Delete Switch" :
                                 switchController.deleteSwitch(Integer.parseInt(com[2]));
