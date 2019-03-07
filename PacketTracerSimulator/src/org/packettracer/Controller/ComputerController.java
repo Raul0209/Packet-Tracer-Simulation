@@ -29,7 +29,8 @@ public class ComputerController {
             }
     }
     
-    public void listComputers(){        
+    public void listComputers(){ 
+        System.out.println();
         for(int i = 0; i < arrayComputer.size(); i++){
            String name = arrayComputer.get(i).getName();
            String ipAddress = arrayComputer.get(i).getIpAddress();

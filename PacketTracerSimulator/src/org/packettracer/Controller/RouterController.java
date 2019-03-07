@@ -33,7 +33,7 @@ public class RouterController {
         for(int i = 0; i<arregloRouter.size(); i++){
             String name = arregloRouter.get(i).getName();
             int ports = arregloRouter.get(i).getPort().length;
-            System.out.print(i + ") " + name + "   GigabyteEthernet: " + ports);        
+            System.out.println(i + ") " + name + "   GigabyteEthernet: " + ports);        
         }
         System.out.println();
     }
