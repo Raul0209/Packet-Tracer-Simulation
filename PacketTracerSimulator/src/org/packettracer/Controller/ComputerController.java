@@ -93,11 +93,11 @@ public class ComputerController {
         System.out.println("The pc has been erased");        
     }
 
-   public void dataUpdatedPc(ArrayList<Computer> data){
+    public void dataUpdatedPc(ArrayList<Computer> data){
          arrayComputer = data;
     }
    
-   public ArrayList<Computer> dataComputer(){    
+    public ArrayList<Computer> dataComputer(){    
         return arrayComputer;
     }
     

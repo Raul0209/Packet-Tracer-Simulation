@@ -39,7 +39,7 @@ public class Switch {
         this.intEthernet[port] = valor;
     }    
     
-     public void delValor(int port) {
+    public void delValor(int port) {
         this.intEthernet[port] = null;
     }  
     

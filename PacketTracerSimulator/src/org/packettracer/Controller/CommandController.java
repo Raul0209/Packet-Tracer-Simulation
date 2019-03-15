@@ -242,7 +242,7 @@ public class CommandController {
     }
     
     
-    //CONECTADO DISPOSITIVOS Y COMO PRUEBA LES PONE EL NOMBRE EN DETERMINADO PUERTO
+    //CONECTA DISPOSITIVOS Y COMO PRUEBA LES PONE EL NOMBRE EN DETERMINADO PUERTO
     public void connectionTo(String dis1, int port1, String dis2, int port2){     
        //Arreglos temporales de cada host, traidos con la funcion de cada controlador.
         arregloSwitchTem = switchController.dataSwitch();
@@ -378,7 +378,7 @@ public class CommandController {
                         computerController.dataUpdatedPc(arregloComputerTem);
                     } 
                 }else if(toRouter >= 0){     
-                    
+                    //Eliminar los dispositivos en los otros.
                         if(arregloRouterTem.get(toRouter).getPort0().contains(arregloSwitchTem.get(toSwitch).getName())){
                             arregloRouterTem.get(toRouter).setPropertiesConec(0, "false", ""); 
                         }
@@ -386,8 +386,6 @@ public class CommandController {
                             arregloRouterTem.get(toRouter).setPropertiesConec(1, "false", ""); 
                         }
                     
-                    
-                        
                         for(int a = 0; a < 24; a++){
                             if(arregloSwitchTem.get(toSwitch).datoPort(a) != null){
                                 if(arregloSwitchTem.get(toSwitch).datoPort(a).equalsIgnoreCase(dis2)){
@@ -421,6 +419,7 @@ public class CommandController {
                         arregloRouterTem = routerController.dataRouter();
 
 
+                        //Virifica con quien sigue conectado
                         for(int e = 0; e < arregloRouterTem.size(); e++){
                             for(int i = 0; i < arregloSwitchTem.size(); i++){
                                 if(arregloRouterTem.get(e).getPort0().contains(arregloSwitchTem.get(i).getName()) 
@@ -521,6 +520,17 @@ public class CommandController {
             }
         
                  
+    }
+    
+    public void ping(String name, String ip){
+        arregloSwitchTem = switchController.dataSwitch();
+        arregloComputerTem = computerController.dataComputer();
+        arregloRouterTem = routerController.dataRouter();
+        
+        
+        
+        
+        
     }
     
     
