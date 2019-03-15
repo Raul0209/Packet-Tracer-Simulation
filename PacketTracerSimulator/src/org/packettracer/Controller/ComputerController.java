@@ -84,7 +84,7 @@ public class ComputerController {
             if(exist == 1){
                System.out.println("\nThe computer with this name already exist.\n");
             }else{
-                arrayComputer.set(x, new Computer(name));        
+                arrayComputer.get(x).setName(name);        
             }    
     }
         

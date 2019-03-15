@@ -48,7 +48,7 @@ public class SwitchController {
             if(exist == 1){
                System.out.println("\nThe switch with this name already exist.\n");
             }else{
-                arregloSwitch.set(x, new Switch(name,24));        
+                arregloSwitch.get(x).setName(name);        
             }    
     }
         
