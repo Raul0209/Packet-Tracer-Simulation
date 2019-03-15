@@ -1,4 +1,4 @@
-                        COMANDOS DEL SIMULADOR DE PACKET TRACER
+                        COMANDOS SIMULADOR DE PACKET TRACER
 
 CREAR
 	create pc name
