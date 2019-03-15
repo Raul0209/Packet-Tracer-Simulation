@@ -1,0 +1,28 @@
+                        COMANDOS DEL SIMULADOR DE PACKET TRACER
+
+CREAR
+	create pc name
+	create router name
+	create switch name
+READ
+	show pc
+	show router
+	show switch
+UPDATE
+	update pc id name
+	update router id name
+	update switch id name
+DELETE
+	delete pc id
+	delete router id
+	delete switch id
+IPCONFIG
+	pc: ipconfig pc name ip-address subnetmask
+	router: ipconfig router name port ip-address subnetmask
+
+GATEWAY
+	pc: defaultgateway pc name gateway
+CONNECTION
+	connection 1reDispositivo port 2doDispositivo port
+PING
+	ping exit-name ip-addres-destination
