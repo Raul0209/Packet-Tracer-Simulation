@@ -49,7 +49,7 @@ public class RouterController {
             if(exist == 1){
                 System.out.println("\nThe router with this name already exist.\n");
             }else{
-               arregloRouter.set(x, new Router(name, 2));   
+               arregloRouter.get(x).setName(name);   
             }    
     }
     

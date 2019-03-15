@@ -68,21 +68,27 @@ public class CommandController {
                                 computerController.listComputers();
                                 break;
                             case "Update Router":
+                                updateDeviceName(comand[1],Integer.parseInt(comand[2]),comand[3]);
                                 routerController.editRouter(Integer.parseInt(comand[2]), comand[3]);
                                 break;
                             case "Update Switch" :
+                                updateDeviceName(comand[1],Integer.parseInt(comand[2]),comand[3]);
                                 switchController.editSwitch(Integer.parseInt(comand[2]), comand[3]);
                                 break;
                             case "Update Pc" :
+                                updateDeviceName(comand[1],Integer.parseInt(comand[2]),comand[3]);
                                 computerController.editComputer(Integer.parseInt(comand[2]), comand[3]);
                                 break;
                             case "Delete Router":
+                                deleteDeviceName(comand[1],Integer.parseInt(comand[2]));
                                 routerController.deleteRouter(Integer.parseInt(comand[2]));
                                 break;
-                            case "Delete Switch" :
+                            case "Delete Switch" :    
+                                deleteDeviceName(comand[1],Integer.parseInt(comand[2]));
                                 switchController.deleteSwitch(Integer.parseInt(comand[2]));
                                 break;
                             case "Delete Pc" :
+                                deleteDeviceName(comand[1],Integer.parseInt(comand[2]));
                                 computerController.deleteComputer(Integer.parseInt(comand[2]));
                                 break;
                             case "Create ?" :
@@ -114,7 +120,130 @@ public class CommandController {
         }while(!command.equalsIgnoreCase("exit"));
     }
     
-     public void connectionTo(String dis1, int port1, String dis2, int port2){     
+    //ACTUALIZA LOS NOMBRES DE LOS OTROS DISPOSITIVOS AL MOMENTO DE MIDIFICARLOS
+    public void updateDeviceName(String dis,int id, String newName){
+        arregloSwitchTem = switchController.dataSwitch();
+        arregloComputerTem = computerController.dataComputer();
+        arregloRouterTem = routerController.dataRouter();
+        
+            switch(dis){
+                case "pc":
+                    for(int e = 0; e < arregloSwitchTem.size(); e++){
+                        for(int a = 0; a < 24; a++){
+                            if(arregloSwitchTem.get(e).datoPort(a) != null){
+                                if(arregloSwitchTem.get(e).datoPort(a).equalsIgnoreCase(arregloComputerTem.get(id).getName())){
+                                    arregloSwitchTem.get(e).setValor(a,newName);    
+                                    switchController.dataUpdatedSw(arregloSwitchTem);
+                                } 
+                            } 
+                        }                              
+                    }                    
+                    break;
+                case "switch":
+                    for(int e = 0; e < arregloComputerTem.size(); e++){        
+                        if(arregloComputerTem.get(e).getConectadoTo() != null){                          
+                            
+                            if(arregloComputerTem.get(e).getConectadoTo().equalsIgnoreCase(arregloSwitchTem.get(id).getName())){
+                                arregloComputerTem.get(e).setConectadoTo(newName);    
+                                computerController.dataUpdatedPc(arregloComputerTem);
+                            } 
+                        }                                                       
+                    } 
+                    for(int e = 0; e < arregloRouterTem.size(); e++){        
+                        if(arregloRouterTem.get(e).getPort0().contains(arregloSwitchTem.get(id).getName())){                          
+                            arregloRouterTem.get(e).setPropertiesConec(0,"true",newName);    
+                            routerController.dataUpdatedRou(arregloRouterTem);                            
+                        }
+                        if(arregloRouterTem.get(e).getPort1().contains(arregloSwitchTem.get(id).getName())){
+                            arregloRouterTem.get(e).setPropertiesConec(1,"true",newName);    
+                            routerController.dataUpdatedRou(arregloRouterTem);
+                        } 
+                    } 
+                    break;
+                case "router":
+                    for(int e = 0; e < arregloSwitchTem.size(); e++){
+                        for(int a = 0; a < 24; a++){
+                            if(arregloSwitchTem.get(e).datoPort(a) != null){
+                                if(arregloSwitchTem.get(e).datoPort(a).equalsIgnoreCase(arregloRouterTem.get(id).getName())){
+                                    arregloSwitchTem.get(e).setValor(a,newName);    
+                                    switchController.dataUpdatedSw(arregloSwitchTem);
+                                } 
+                            } 
+                        }                              
+                    } 
+                    break;
+            }
+           
+        
+        routerController.dataUpdatedRou(arregloRouterTem);
+        switchController.dataUpdatedSw(arregloSwitchTem);
+        computerController.dataUpdatedPc(arregloComputerTem);
+    }
+    
+    
+    //ELIMINA LOS NOMBRES DE LOS OTROS DISPOSITIVOS AL MOMENTO DE ELIMINARLOS
+    public void deleteDeviceName(String dis,int id){
+        arregloSwitchTem = switchController.dataSwitch();
+        arregloComputerTem = computerController.dataComputer();
+        arregloRouterTem = routerController.dataRouter();
+        
+            switch(dis){
+                case "pc":
+                    for(int e = 0; e < arregloSwitchTem.size(); e++){
+                        for(int a = 0; a < 24; a++){
+                            if(arregloSwitchTem.get(e).datoPort(a) != null){
+                                if(arregloSwitchTem.get(e).datoPort(a).equalsIgnoreCase(arregloComputerTem.get(id).getName())){
+                                    arregloSwitchTem.get(e).setValor(a,null);    
+                                    switchController.dataUpdatedSw(arregloSwitchTem);
+                                } 
+                            } 
+                        }                              
+                    }                    
+                    break;
+                case "switch":
+                    for(int e = 0; e < arregloComputerTem.size(); e++){        
+                        if(arregloComputerTem.get(e).getConectadoTo() != null){                          
+                            
+                            if(arregloComputerTem.get(e).getConectadoTo().equalsIgnoreCase(arregloSwitchTem.get(id).getName())){
+                                arregloComputerTem.get(e).setConectadoTo(null);    
+                                computerController.dataUpdatedPc(arregloComputerTem);
+                            } 
+                        }                                                       
+                    } 
+                    for(int e = 0; e < arregloRouterTem.size(); e++){        
+                        if(arregloRouterTem.get(e).getPort0().contains(arregloSwitchTem.get(id).getName())){                          
+                            arregloRouterTem.get(e).setPropertiesConec(0,"false","");    
+                            routerController.dataUpdatedRou(arregloRouterTem);                            
+                        }
+                        if(arregloRouterTem.get(e).getPort1().contains(arregloSwitchTem.get(id).getName())){
+                            arregloRouterTem.get(e).setPropertiesConec(1,"false","");    
+                            routerController.dataUpdatedRou(arregloRouterTem);
+                        } 
+                    }
+                    break;
+                case "router":
+                    for(int e = 0; e < arregloSwitchTem.size(); e++){
+                        for(int a = 0; a < 24; a++){
+                            if(arregloSwitchTem.get(e).datoPort(a) != null){
+                                if(arregloSwitchTem.get(e).datoPort(a).equalsIgnoreCase(arregloRouterTem.get(id).getName())){
+                                    arregloSwitchTem.get(e).setValor(a,null);    
+                                    switchController.dataUpdatedSw(arregloSwitchTem);
+                                } 
+                            } 
+                        }                              
+                    }
+                    break;
+            }
+           
+        
+        routerController.dataUpdatedRou(arregloRouterTem);
+        switchController.dataUpdatedSw(arregloSwitchTem);
+        computerController.dataUpdatedPc(arregloComputerTem);
+    }
+    
+    
+    //CONECTADO DISPOSITIVOS Y COMO PRUEBA LES PONE EL NOMBRE EN DETERMINADO PUERTO
+    public void connectionTo(String dis1, int port1, String dis2, int port2){     
        //Arreglos temporales de cada host, traidos con la funcion de cada controlador.
         arregloSwitchTem = switchController.dataSwitch();
         arregloComputerTem = computerController.dataComputer();
