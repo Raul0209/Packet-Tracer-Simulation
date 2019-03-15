@@ -9,6 +9,7 @@ public class SwitchController {
     Scanner dt = new Scanner(System.in);
     Switch switches = new Switch();
     
+    
     static ArrayList<Switch> arregloSwitch = new ArrayList<Switch>();
     
     public void createSwitch(String name){    
@@ -29,9 +30,12 @@ public class SwitchController {
         System.out.println();
         for(int i = 0; i < arregloSwitch.size(); i++){
            String name = arregloSwitch.get(i).getName();
+           String ports = arregloSwitch.get(i).getIntEthernet();
+           
            System.out.println(" " + i +") "+ name +" - Etherner: "+ 24);
+           System.out.println(ports+"\n");
         }
-        System.out.println();
+        
     }
     
     public void editSwitch(int x,String name){
@@ -50,6 +54,14 @@ public class SwitchController {
         
     public void deleteSwitch(int index){
         arregloSwitch.remove(index);        
+    }
+    
+    public void dataUpdatedSw(ArrayList<Switch> data){
+         arregloSwitch = data;
+    }
+    
+    public ArrayList<Switch> dataSwitch(){    
+        return arregloSwitch;
     }
     
 }
